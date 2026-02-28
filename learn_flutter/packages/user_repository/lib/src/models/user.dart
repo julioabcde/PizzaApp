@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:user_repository/src/entities/entities.dart';
 
-class MyUser {
+class MyUser extends Equatable {
   String userId;
   String email;
   // String password;
@@ -33,7 +34,7 @@ class MyUser {
     );
   }
 
-  static MyUser fromEntity(MyUserEntity entity){
+  static MyUser fromEntity(MyUserEntity entity) {
     return MyUser(
       userId: entity.userId,
       email: entity.email,
@@ -47,4 +48,7 @@ class MyUser {
   String toString() {
     return 'MyUser: $userId, $email, $name, $hasActiveCart';
   }
+
+  @override
+  List<Object?> get props => [userId, email, name, hasActiveCart];
 }
