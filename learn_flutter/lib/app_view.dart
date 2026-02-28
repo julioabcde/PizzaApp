@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_flutter/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:learn_flutter/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:learn_flutter/screens/auth/views/welcome_screen.dart';
 import 'package:learn_flutter/screens/home/views/home_screen.dart';
 
 class MyAppView extends StatelessWidget {
   const MyAppView({super.key});
-  // 1:19:49
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,8 +15,8 @@ class MyAppView extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.light(
-          background: Colors.grey.shade100,
-          onBackground: Colors.black,
+          surface: Colors.red.shade200,
+          onSurface: Colors.black,
           primary: Colors.blue,
           onPrimary: Colors.white,
         ),
@@ -23,7 +24,12 @@ class MyAppView extends StatelessWidget {
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: ((context, state) {
           if (state.status == AuthenticationStatus.authenticated) {
-            return HomeScreen ();
+            return BlocProvider(
+              create: (context) => SignInBloc(
+                context.read<AuthenticationBloc>().userRepository,
+              ),
+              child: HomeScreen(),
+            );
           } else {
             return WelcomeScreen();
           }
