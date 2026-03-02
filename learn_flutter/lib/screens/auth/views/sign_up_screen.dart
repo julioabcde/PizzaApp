@@ -166,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                           color: containsUpperCase
                               ? Colors.green
-                              : Theme.of(context).colorScheme.onBackground,
+                              : Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       Text(
@@ -174,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                           color: containsLowerCase
                               ? Colors.green
-                              : Theme.of(context).colorScheme.onBackground,
+                              : Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       Text(
@@ -182,7 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                           color: containsNumber
                               ? Colors.green
-                              : Theme.of(context).colorScheme.onBackground,
+                              : Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -195,7 +195,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                           color: containsSpecialChar
                               ? Colors.green
-                              : Theme.of(context).colorScheme.onBackground,
+                              : Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       Text(
@@ -203,7 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                           color: contains8Length
                               ? Colors.green
-                              : Theme.of(context).colorScheme.onBackground,
+                              : Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -236,9 +236,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            MyUser myUser = MyUser.empty;
-                            myUser.email = emailController.text;
-                            myUser.name = nameController.text;
+                            MyUser myUser = MyUser(
+                              userId: '',
+                              email: emailController.text,
+                              name: nameController.text,
+                              hasActiveCart: false,
+                            );
 
                             setState(() {
                               context.read<SignUpBloc>().add(

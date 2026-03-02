@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:user_repository/src/entities/entities.dart';
 
 class MyUser extends Equatable {
-  String userId;
-  String email;
+  final String userId;
+  final String email;
   // String password;
-  String name;
-  bool hasActiveCart;
+  final String name;
+  final bool hasActiveCart;
 
-  MyUser({
+  const MyUser({
     required this.userId,
     required this.email,
     // required this.password,
@@ -16,7 +16,7 @@ class MyUser extends Equatable {
     required this.hasActiveCart,
   });
 
-  static final empty = MyUser(
+  static const empty = MyUser(
     userId: '',
     email: '',
     // password: '',

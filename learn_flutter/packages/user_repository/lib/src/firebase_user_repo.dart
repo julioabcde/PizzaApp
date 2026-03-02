@@ -1,6 +1,4 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:user_repository/src/models/user.dart';
-import 'package:user_repository/src/user_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:user_repository/user_repository.dart';
@@ -46,7 +44,12 @@ class FirebaseUserRepo implements UserRepository {
     try {
       UserCredential user = await _firebaseAuth.createUserWithEmailAndPassword(
           email: myUser.email, password: password);
-      myUser.userId = user.user!.uid;
+      myUser = MyUser(
+        userId: user.user!.uid,
+        email: myUser.email,
+        name: myUser.name,
+        hasActiveCart: myUser.hasActiveCart,
+      );
       return myUser;
     } catch (e) {
       throw Exception('Error signing up: $e');
